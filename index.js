@@ -28,10 +28,10 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 // configure session middleware
-app.use(session({
-    secret: "debuggersession",
-    cookie: {maxAge: 1000 * 60 * 60 * 24}
-}));
+//app.use(session({
+//    secret: "debuggersession",
+//    cookie: {maxAge: 1000 * 60 * 60 * 24}
+//}));
 
 // configurw static files
 app.use('/static', express.static('public'));
