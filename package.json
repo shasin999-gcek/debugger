@@ -1,14 +1,14 @@
 {
-  "name": "debugger",
-  "version": "1.0.0",
-  "description": "A Web App for conducting debugging Competitions",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+  "name": "node-js-getting-started",
+  "version": "0.2.6",
+  "description": "A sample Node.js app using Express 4",
+  "engines": {
+    "node": "6.11.1"
   },
-  "author": "Muhammed Shasin p",
-  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
@@ -17,5 +17,19 @@
     "morgan": "^1.9.0",
     "pg": "^7.3.0",
     "shelljs": "^0.7.8"
-  }
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/node-js-getting-started"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
 }

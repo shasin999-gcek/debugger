@@ -23,3 +23,4 @@ teamNameInput.onchange = function(e) {
        $('#tname-div').removeClass('has-error'); 
     }
 }
+
