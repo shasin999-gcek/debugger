@@ -305,6 +305,6 @@ app.get('/players/status/:accessCode', function(req, res) {
         return res.send("Not Acceessible");
 });
 
-app.listen(8080, function () {
-   console.log("Debugger Listening at port 8080"); 
+app.listen(5000, function () {
+   console.log("Debugger Listening at port 5000"); 
 });
