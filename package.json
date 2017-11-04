@@ -1,0 +1,21 @@
+{
+  "name": "debugger",
+  "version": "1.0.0",
+  "description": "A Web App for conducting debugging Competitions",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Muhammed Shasin p",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
+    "pg": "^7.3.0",
+    "shelljs": "^0.7.8"
+  }
+}

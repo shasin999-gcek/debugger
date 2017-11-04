@@ -1,0 +1,26 @@
+<div class="container">
+    <table class="table table-striped table-hover ">
+      <thead>
+        <tr>
+          <th>Team Name</th>
+          <th>Start Time</th>
+          <th>Program 1</th>
+          <th>Program 2</th>
+          <th>Program 3</th>
+          <th>Program 4</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each players}}
+            <tr>
+              <td>{{team_name}}</td>
+              <td>{{start_time}}</td>
+              <td>{{program1}}</td>
+              <td>{{program2}}</td>
+              <td>{{program3}}</td>
+              <td>{{program4}}</td>
+            </tr>
+        {{/each}}
+      </tbody>
+    </table>
+</div>

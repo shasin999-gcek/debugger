@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Register</h3>
+        </div>
+        <div class="panel-body">
+           <form class="form" method="post" action="/register">
+                <div id="tname-div" class="form-group">
+                    <label class="col-lg-3 control-label">Team Name: </label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" id="tname" name="tname" max="50" placeholder="Your Name" required/>
+                        <span class="help-block">Do not contain any white space</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">No of Players: </label>
+                    <div class="col-lg-9">
+                        <select class="form-control" id="p-count" required>
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Player1 Name: </label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" name="p1name" max="50" placeholder="Player1 Name" required/>
+                    </div>
+                </div>
+                <div id="p2" class="form-group">
+                    <label class="col-lg-3 control-label">Player2 Name: </label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" name="p2name" max="50" placeholder="Player2 Name" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">College Name: </label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" name="college" max="50" placeholder="College Name" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email: </label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="email" name="email" max="50" placeholder="abc@email.com" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Mobile No: </label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="number" name="mobNo" min="10" placeholder="mobile number" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Password: </label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="password" name="pssd" id="pssd" min="6" max="16" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        Confirm Password: 
+                    </label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="password" id="c-pssd" min="6" max="16" required/>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

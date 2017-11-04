@@ -1,0 +1,120 @@
+
+<div class="container">
+  <h3 id="timer"></h3>     
+  <ul id="tab" class="nav nav-tabs">
+     {{#each programs}}
+      <li id="t-{{name}}"><a href="#{{name}}" data-toggle="tab" aria-expanded="true">{{name}}</a></li>
+     {{/each}}
+  </ul>
+   <br />
+    <div id="myTabContent" class="tab-content">
+      {{#each programs}}
+          <div id="{{name}}" class="tab-pane fade in">
+            <div class="col-lg-9 form-group">
+               <textarea class="form-control" name="{{name}}" cols="30" rows="20">{{ content }}</textarea>   
+            </div> 
+            <div class="col-lg-3">
+                <button id="btn-{{name}}" class="btn btn-primary" type="submit" 
+                onclick="submit({{id}},'{{name}}')">Submit</button><br/><br/> 
+                <div id="alert-{{name}}">
+                </div>
+                <div id="time-{{name}}" class="text-success"></div>
+            </div> 
+          </div>
+      {{/each}}
+      <input id="lang" style="display:none;" value="{{lang}}" /> 
+    </div>
+     
+</div>
+
+<script>
+    function goodbye(e) {
+        if(!e) e = window.event;
+        //e.cancelBubble is supported by IE - this will kill the bubbling process.
+        e.cancelBubble = true;
+        e.returnValue = 'You sure you want to leave/refresh this page?';
+
+        //e.stopPropagation works in Firefox.
+        if (e.stopPropagation) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+    }
+    window.onbeforeunload=goodbye;
+    
+    window.onload = function() {
+       $('ul#tab> li:first').addClass("active");
+       $('div#myTabContent> div:first').addClass("active");
+       // sent starting time to server
+       var startTime = new Date().getTime();    
+       axios.post('/set-start-time', {startTime})
+            .then(function(response) {
+                // setting up timer
+                // Set the date we're counting down to
+                var countDownDate = response.data.startTime + 1000*60*30;
+
+                // Update the count down every 1 second
+                var x = setInterval(function() {
+
+                    // Get todays date and time
+                    var now = new Date().getTime();
+
+                    // Find the distance between now an the count down date
+                    var distance = countDownDate - now;
+                    
+                    // Time calculations for days, hours, minutes and seconds
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Output the result in an element with id="demo"
+                    document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+
+                    // If the count down is over, write some text 
+                    if (distance <= 0) {
+                        clearInterval(x);
+                        $('.container').remove();
+                        $('body').append('<h1 style="margin-top:25%">Thank YOU</h1>');
+                    }
+                }, 1000);
+            });
+    }
+    
+    var successAlert = `<div class="alert alert-dismissible alert-success">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <strong>Well done! Your Submission is accepted</strong> 
+                </div>`;
+    var errorAlert = `<div class="alert alert-dismissible alert-danger">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <strong>Sorry Your Submission is rejected. Try Again !!!</strong> 
+                </div>`;
+    
+    function submit(id, name) {
+        var lang = document.getElementById('lang').value;
+        var content = document.getElementsByName(name)[0].value;
+        var now = new Date().getTime();
+          
+        axios.post('/submit', {lang: lang, name: name, id: id, content: content, now})
+            .then(function(response) {
+                console.log(response.data); 
+                $('.alert').remove();
+                $(`#time-${name} h6`).remove();
+                if(response.data.status) {
+                    $(`#alert-${name}`).append(successAlert);
+                    $(`#time-${name}`).append("<h6>Last Submission :" + new Date(now).toLocaleTimeString() + "</h6>");
+                } else {
+                    $(`#alert-${name}`).append(errorAlert);
+                }
+            });
+    }
+    
+    
+</script>
+
+<!--<script src="/static/prism.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/CodeFlask.js/0.2.0/codeflask.min.js"></script>
+  <script>
+    window.onload = function() {
+        var flask = new CodeFlask();
+    flask.run('#my-code-wrapper',  { language: 'c', lineNumbers: true });
+    }
+</script>-->
