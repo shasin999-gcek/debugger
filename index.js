@@ -28,10 +28,10 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 // configure session middleware
-//app.use(session({
-//    secret: "debuggersession",
-//    cookie: {maxAge: 1000 * 60 * 60 * 24}
-//}));
+app.use(session({
+    secret: "debuggersession",
+    cookie: {maxAge: 1000 * 60 * 60 * 24}
+}));
 
 // configurw static files
 app.use('/static', express.static('public'));
@@ -53,6 +53,12 @@ function hash(password, salt) {
    var hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512'); 
    return ['pbkdf2', '10000', salt, hash.toString('hex')].join('$');
 };
+
+app.get('/db-create', function(req, res) {
+  pool.query('SELECT NOW()', (err, result) => {
+    return res.send(JSON.stringify(result.rows));
+  });
+});
 
 // root end point
 app.get('/', function(req, res) {
@@ -81,9 +87,10 @@ app.post('/register', function(req, res) {
    pool.query('INSERT INTO participants (team_name, email, mobile_no, password, player1, player2, college) VALUES ($1, $2, $3, $4, $5, $6, $7)', 
     [teamName, email, mobNo, hashedPassword, player1, player2, college], (err, result) => {
       if(err) {
-          res.status(500).send(JSON.stringify(err));
+          console.log(err);
+          return res.status(500).send(JSON.stringify(err));
       } else {
-          res.redirect('/login');
+          return res.redirect('/login');
       }
    });    
 });
