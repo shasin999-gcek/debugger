@@ -1,0 +1,12 @@
+CREATE TABLE "participants" (
+  "id" serial NOT NULL,
+  "team_name" text NOT NULL,
+  "email" text NOT NULL,
+  "mobile_no" text NOT NULL,
+  "password" text NOT NULL,
+  "is_completed" boolean NOT NULL DEFAULT 'f',
+  "player1" text NOT NULL,
+  "player2" text NULL,
+  "college" integer NOT NULL
+);
+

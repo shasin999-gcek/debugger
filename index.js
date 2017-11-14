@@ -291,18 +291,32 @@ app.post('/set-start-time', function(req, res) {
    }); 
 });
 
+function getTimeFormatted(time) {
+  return new Date(time).toLocaleTimeString();
+}
+
 app.get('/players/status/:accessCode', function(req, res) {
     if(req.params.accessCode === '170g0tj02') {
         var query = `select participants.team_name, players.program1,  players.program2,  players.program3,  players.program4, players.start_time from participants, players`;
         
-        pool.query(query, function(err, result) {
+        pool.query(query, function(err, results) {
             if(err) {
                 return res.status(500).send(err.toString());
             } else {
             
                 if(result.rows.length !== 0) {
+                    var players = results.rows.map(function(result) {
+                       return [
+                         team_name: result.team_name,
+                         program1: getTimeFormatted(result.program1),
+                         program2: getTimeFormatted(result.program2),
+                         program3: getTimeFormatted(result.program3),
+                         program4: getTimeFormatted(result.program4),
+                         start_time: getTimeFormatted(result.start_time)
+                       ];
+                    });
                     
-                    return res.render('playerStatus', {players: result.rows});
+                    return res.render('playerStatus', {players: players});
                 } else {
                     return res.send("No Status");
                 }
